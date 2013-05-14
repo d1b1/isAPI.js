@@ -116,17 +116,17 @@ Here is an example of a HTTP Post. The data for the request is defined in the .p
 ### Options
 The are methods that help with setup and debugging of the calls. 
 
-# .done(done) - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN).
-# .debug() - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
+*  .done(done) - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN).
+*  .debug() - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
 
 ### .Path() & .Query()
 These two options can be used to either define a base path or to build a path using one or more sets.
 
-# .path( '/path/to' ) - Accepts a string. One for API call. 
-# .query() - Helper method to append values to the base path. Accepts the following
-# .query( 'field=1') - Single key value string.
-# .query( [ 'field=1', 'field2=2' ]) - Array of key values strings.
-# .qerry( { field1: 1, field2: 2} ) - Object of key values.
+*  .path( '/path/to' ) - Accepts a string. One for API call. 
+*  .query() - Helper method to append values to the base path. Accepts the following
+*  .query( 'field=1') - Single key value string.
+*  .query( [ 'field=1', 'field2=2' ]) - Array of key values strings.
+*  .qerry( { field1: 1, field2: 2} ) - Object of key values.
 
 ### .Json() 
 This sets the content type. Alternate versions. .contenttype('xml,json,html')
@@ -134,10 +134,10 @@ This sets the content type. Alternate versions. .contenttype('xml,json,html')
 ### HTTP Verbs
 Use the following to set the HTTP verb.
 
-.get() - Sets the Method to 'GET'. Use can pass in a string, array or object argument to add to the path.
-.post() - Sets the Method to 'POST'. Argument (Object) is used in the request body.
-.put() - Sets the Method to 'PUT'. Argument (Object) is used in the request body.
-.delete() - Sets the Method to 'DELETE'.
+*  .get() - Sets the Method to 'GET'. Use can pass in a string, array or object argument to add to the path.
+*  .post() - Sets the Method to 'POST'. Argument (Object) is used in the request body.
+*  .put() - Sets the Method to 'PUT'. Argument (Object) is used in the request body.
+*  .delete() - Sets the Method to 'DELETE'.
 
 ### Protocals
 Currently this only supports HTTP. HTTPs is coming. Use the http() for https() to set the protocal at the call level.
@@ -157,30 +157,30 @@ and provide a patterns for testing elements, arrays and patterns in the data.
 Read [Stehan.Goessner Post](http://goessner.net/articles/JsonPath/) for more about JSONPath.
 
 ### Response Data Object
-All response data is testable. 
+All response data is testable. Note the `$` is not the Jquery selector.
 
-# $.statusCode - HTTP statusCode (200, 401 etc).
-# $.options - Contains all the rest options; path, hostname, headers etc.
-# $.data - Parsed response data.
-# $.raw - Unparsed HTTP response string.
+*  `$.statusCode` - HTTP statusCode (200, 401 etc).
+*  `$.options` - Contains all the rest options; path, hostname, headers etc.
+*  `$.data` - Parsed response data.
+*  `$.raw` - Unparsed HTTP response string.
 
 ### Dependencies
 This code base curently assumes you are using the Mocha packages.
 
-# [JSONPath](https://npmjs.org/package/JSONPath)
-# [underscore](https://npmjs.org/package/underscore)
-# [request](https://npmjs.org/package/request)
+*  [JSONPath](https://npmjs.org/package/JSONPath)
+*  [underscore](https://npmjs.org/package/underscore)
+*  [request](https://npmjs.org/package/request)
 
 ### Roadmap
 The following are features and changes planned for the next few weeks.
 
-# Storage of tests and results for chaining of API behaviors.
-# Better OAuth signature options.
-# HTTPS protocal support.
-# Test for the library.
-# Hints for API calls.
-# Swagger UI consumption.
-# Lastly - refactor to allow it to run in a browser.
+*  Storage of tests and results for chaining of API behaviors.
+*  Better OAuth signature options.
+*  HTTPS protocal support.
+*  Test for the library.
+*  Hints for API calls.
+*  Swagger UI consumption.
+*  Lastly - refactor to allow it to run in a browser.
 
 Feedback is 100% welcome. The current code was hammered together late night to 
 make testing easier and to get an API out the door.
