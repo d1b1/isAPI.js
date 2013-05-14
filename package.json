@@ -26,10 +26,11 @@
   "dependencies": {
     "request": "2.9.202",
     "underscore": "~1.4.4",
-    "JSONPath": "~0.9.1"
+    "JSONPath": "~0.9.1",
+    "mocha": "~1.9.0"
   },
   "scripts": {
     "start": "./bin/index.js",
-    "test": "mocha test/blank.js"
+    "test": "./node_modules/.bin/mocha test/blank.js --reporter list"
   }
 }
