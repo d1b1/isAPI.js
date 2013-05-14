@@ -159,17 +159,17 @@ Read [Stehan.Goessner Post](http://goessner.net/articles/JsonPath/) for more abo
 ### Response Data Object
 All response data is testable. 
 
-* $.statusCode - HTTP statusCode (200, 401 etc).
-* $.options - Contains all the rest options; path, hostname, headers etc.
-* $.data - Parsed response data.
-* $.raw - Unparsed HTTP response string.
+# $.statusCode - HTTP statusCode (200, 401 etc).
+# $.options - Contains all the rest options; path, hostname, headers etc.
+# $.data - Parsed response data.
+# $.raw - Unparsed HTTP response string.
 
 ### Dependencies
 This code base curently assumes you are using the Mocha packages.
 
-* [JSONPath](https://npmjs.org/package/JSONPath)
-* [underscore](https://npmjs.org/package/underscore)
-* [request](https://npmjs.org/package/request)
+# [JSONPath](https://npmjs.org/package/JSONPath)
+# [underscore](https://npmjs.org/package/underscore)
+# [request](https://npmjs.org/package/request)
 
 ### Roadmap
 The following are features and changes planned for the next few weeks.
