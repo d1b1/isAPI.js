@@ -25,11 +25,11 @@ and Jasmine both provide support for testing asynch calls. During the developmen
 that requires OAuth for all not Get calls I found the tests were getting out of hand. This
 library was written to make may tests readable, even late night¡
 
-# JQuery like chainable methods!
-# Provide the ability to test all elements of an API call, options, response, status codes.
-# Provide Custom callbacks for response parsing.
-# Support for both Mocha and Jasmine
-# Provide Custom Authentication callbacks for different OAuth Signatures.
+#  JQuery like chainable methods!
+#  Provide the ability to test all elements of an API call, options, response, status codes.
+#  Provide Custom callbacks for response parsing.
+#  Support for both Mocha and Jasmine
+#  Provide Custom Authentication callbacks for different OAuth Signatures.
 
 ## Installation
 This is a NPM package. You can download from the package, or call the Github.
@@ -53,9 +53,9 @@ This is a NPM package. You can download from the package, or call the Github.
 To keep things DRY and readable, a few things are assumes or defined once. You can of course
 make your API rests as explicit as you want. The following are assumed.
 
-*  All requests are assume to be JSON (application/json). use the json() or contenttype() to change.
+*  All requests are assume to be JSON (application/json). use the `json()` or `contenttype()` to change.
 *  If no Verb is defined then all request are assumed to be GETs.
-*  If no protocal is defined its assumed to be HTTP. Use http() or https() to set explicitly.
+*  If no protocal is defined its assumed to be HTTP. Use `http()` or `https()` to set explicitly.
 
 ## Example of a GET
 This will call the /maker/ID path with a GET and will test the statusCode, data and raw.
@@ -113,50 +113,51 @@ Here is an example of a HTTP Post. The data for the request is defined in the .p
 
 ```
 
-### Options
+## Options
 The are methods that help with setup and debugging of the calls. 
 
-*  .done(done) - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN).
-*  .debug() - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
+*  `.done(done)` - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN). The `done` links the call
+to the Mocha or Jasmine async `done` function and ensures the tests comply with the testing framework flow.
+*  `.debug()` - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
 
-### .Path() & .Query()
+## .Path() & .Query()
 These two options can be used to either define a base path or to build a path using one or more sets.
 
-*  .path( '/path/to' ) - Accepts a string. One for API call. 
-*  .query() - Helper method to append values to the base path. Accepts the following
-*  .query( 'field=1') - Single key value string.
-*  .query( [ 'field=1', 'field2=2' ]) - Array of key values strings.
-*  .qerry( { field1: 1, field2: 2} ) - Object of key values.
+*  `.path( '/path/to' )` - Accepts a string. One for API call. 
+*  `.query()` - Helper method to append values to the base path. Accepts the following
+*  `.query( 'field=1')` - Single key value string.
+*  `.query( [ 'field=1', 'field2=2' ])` - Array of key values strings.
+*  `.qerry( { field1: 1, field2: 2} )` - Object of key values.
 
-### .Json() 
+## .Json() 
 This sets the content type. Alternate versions. .contenttype('xml,json,html')
 
-### HTTP Verbs
+## HTTP Verbs
 Use the following to set the HTTP verb.
 
-*  .get() - Sets the Method to 'GET'. Use can pass in a string, array or object argument to add to the path.
-*  .post() - Sets the Method to 'POST'. Argument (Object) is used in the request body.
-*  .put() - Sets the Method to 'PUT'. Argument (Object) is used in the request body.
-*  .delete() - Sets the Method to 'DELETE'.
+*  `.get()` - Sets the Method to 'GET'. Use can pass in a string, array or object argument to add to the path.
+*  `.post()` - Sets the Method to 'POST'. Argument (Object) is used in the request body.
+*  `.put()` - Sets the Method to 'PUT'. Argument (Object) is used in the request body.
+*  `.delete()` - Sets the Method to 'DELETE'.
 
-### Protocals
+## Protocals
 Currently this only supports HTTP. HTTPs is coming. Use the http() for https() to set the protocal at the call level.
 
-### .Post() & .Put
+### .Post() & .Put()
 This sets the rest body. Accepts a object of key values pairs.
 
-### .Debug() 
+## `.Debug()`
 Optional method. This is a chainable method that enables or disables the debug output per call. Defaults to true when in the chain. 
 Use true or false to enable or disable in existing tests. 
 
-### Assertions
+## Assertions
 This an object with each key contains the HTTP request value or the data value to check. Its assumed you will
 want to test a number of elements in the API response. The JSONPath pattern is issued to parse the response
 and provide a patterns for testing elements, arrays and patterns in the data.
 
 Read [Stehan.Goessner Post](http://goessner.net/articles/JsonPath/) for more about JSONPath.
 
-### Response Data Object
+## Response Data Object
 All response data is testable. Note the `$` is not the Jquery selector.
 
 *  `$.statusCode` - HTTP statusCode (200, 401 etc).
@@ -164,14 +165,14 @@ All response data is testable. Note the `$` is not the Jquery selector.
 *  `$.data` - Parsed response data.
 *  `$.raw` - Unparsed HTTP response string.
 
-### Dependencies
+## Dependencies
 This code base curently assumes you are using the Mocha packages.
 
 *  [JSONPath](https://npmjs.org/package/JSONPath)
 *  [underscore](https://npmjs.org/package/underscore)
 *  [request](https://npmjs.org/package/request)
 
-### Roadmap
+## Roadmap
 The following are features and changes planned for the next few weeks.
 
 *  Storage of tests and results for chaining of API behaviors.
