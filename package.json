@@ -7,6 +7,11 @@
     "node": "0.8.8",
     "npm": "1.1.9"
   },
+  "keywords": [
+    "mocha",
+    "api",
+    "chain"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/d1b1/isAPI.js.git"
