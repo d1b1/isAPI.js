@@ -53,9 +53,9 @@ This is a NPM package. You can download from the package, or call the Github.
 To keep things DRY and readable, a few things are assumes or defined once. You can of course
 make your API rests as explicit as you want. The following are assumed.
 
-# All requests are assume to be JSON (application/json). use the json() or contenttype() to change.
-# If no Verb is defined then all request are assumed to be GETs.
-# If no protocal is defined its assumed to be HTTP. Use http() or https() to set explicitly.
+*  All requests are assume to be JSON (application/json). use the json() or contenttype() to change.
+*  If no Verb is defined then all request are assumed to be GETs.
+*  If no protocal is defined its assumed to be HTTP. Use http() or https() to set explicitly.
 
 ## Example of a GET
 This will call the /maker/ID path with a GET and will test the statusCode, data and raw.
