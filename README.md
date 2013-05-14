@@ -7,9 +7,8 @@ Still very pre-beta. No tests for the test yet.
 
 ```
    api
-    .path("/maker/100").
-    .json()
-    .get()
+    .path('/maker/100')
+    .get().json()
     .assertions(
       { 
         '$.data.name': function(val) { assert.equal(val, 'Vermont Blue') },
@@ -56,7 +55,6 @@ This will call the /maker/ID path with a GET and will test the statusCode, data 
 
   describe("/Maker", function(done) {   
     it("should return a maker", function(done){
-
       api
         .path("/maker/1").query('a=111').query('b=111')
         .json()
@@ -69,7 +67,6 @@ This will call the /maker/ID path with a GET and will test the statusCode, data 
           }
         )
         .done(done);
-
     );
 
   });
@@ -164,6 +161,23 @@ All response data is testable. Note the `$` is not the Jquery selector.
 *  `$.options` - Contains all the rest options; path, hostname, headers etc.
 *  `$.data` - Parsed response data.
 *  `$.raw` - Unparsed HTTP response string.
+
+## Experimental
+
+`.parse()` - Provides the ability to parse the response object with a callback. This might
+be used to remove API wrappers and content that makes tests hard to read. This will be something
+that can be defined for all API calls, or at the API call levels.
+
+Example of a parse call that will remove all data and only return the .data value with
+a specific value in the response call. 
+
+```
+  .get()
+  .parse(
+    function(data) {  return data.name } 
+  )
+  .done()
+```
 
 ## Dependencies
 This code base curently assumes you are using the Mocha packages.
