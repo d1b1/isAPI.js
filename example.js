@@ -5,26 +5,25 @@ var api = isAPI();
 
 api.host('staging-api.formagg.io');
 
-var test1 = _.clone(api);
-
 describe('/relationship', function(done) {   
 
-  // it('should retreive a maker', function(done){
-  //   _.clone(api)
-  //     .path('/maker/510df090da57f2000000011e')
-  //     .json()
-  //     .get()
-  //     .debug(false)
-  //     .assertions(
-  //       { 
-  //         '$.name': function(val) { assert.equal(val, 'Lactalis') } 
-  //       }
-  //     )
-  //     .done(done);
-  //   }
-  // );
+  it('should retreive a maker', function(done){
+    _.clone(api)
+      .path('/maker/510df090da57f2000000011e')
+      .json()
+      .get()
+      .debug(false)
+      .assertions(
+        { 
+          '$.name': function(val) { assert.equal(val, 'Lactalis') } 
+        }
+      )
+      .done(done);
+    }
+  );
 
   it('should give us the new maker', function(done){
+
     _.clone(api)
       .path('/maker')
         .query('a=111')
@@ -52,26 +51,3 @@ describe('/relationship', function(done) {
 
 });
 
-    // .parse(
-    //   function(d) { 
-    //     console.log(d.name)
-    //     return d.name
-    //   }
-    // )
-
-// test1
-//   .url('/maker')
-//   .post( 
-//    {
-//       name: 'Bobo Creamery',
-//       country: 'United States',
-//       state: 'Vermont'
-//    }
-//   )
-//   .success(
-//     {
-//       t1: 'assert.equal(1, 1)',
-//       t2: 'assert.equal(1, 1)'
-//     }
-//   )
-//   .done();

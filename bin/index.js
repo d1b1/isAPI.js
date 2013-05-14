@@ -1,23 +1,25 @@
 var _        = require('underscore');
-var http     = require("http");
-var assert   = require("assert");
+var http     = require('http');
 var jsonPath = require('JSONPath').eval;
 
 var api = (function() {
 
+  // Setup the defaults.
   var options = {
-    method: null,
-    url: null,
-    headers: {},
-    datatype: null,
-    data: null,
-    parse: null,
-    _hasParse: false,
+    headers:    {},
+    method:     'GET',
+    url:        null,
+    datatype:   null,
+    data:       null,
+    parse:      null,
     assertions: null,
-    debug: false,
-    _query: []
+    debug:      false,
+    // Meta Fields.
+    _query:    [],
+    _hasParse: false
   };
   
+  // Defined the hostname.
   options.host = function(host) { 
     this.hostname = host;
     return this;
@@ -28,7 +30,8 @@ var api = (function() {
     return this;
   };
 
-  // Methods
+  // Add to the _query to add to the 
+  // array of options. Supports string, array or object.
   options.query = function(opt) {
     this._query.push(opt)
     return this;
@@ -39,7 +42,7 @@ var api = (function() {
     return this;
   };
 
-  // Methods
+  // HTTP Methods
   options.get = function(query) {
     this.method = 'GET';
     return this;
@@ -70,13 +73,11 @@ var api = (function() {
     }
 
     // Object
-    // If we get { key, value }
     if (typeof data == 'object') {
       this.headers[data.key] = data.value;
     }
 
     // Array
-    // If we get { key, value }
     if (typeof data == 'array') {
       this.headers[data[0]] = data[1];
     }
@@ -113,23 +114,18 @@ var api = (function() {
     return this;
   };
 
+  // Helder Method to handle _assertions.
   options.handleAssertions = function(done) {
-
     var that = this;
     var jsonResponse = this.result;
-
     for (var path in this.assertions) {
       var pathSearchResult = jsonPath(jsonResponse, path);
-
-      console.log(path)
-
-      if (pathSearchResult.length == 1) 
-        pathSearchResult = pathSearchResult[0];
-
+      if (pathSearchResult.length == 1) pathSearchResult = pathSearchResult[0];
       that.assertions[path](pathSearchResult);
     }
   };
 
+  // Helper method to build the Query string field=100&field2=300
   options._getQuery = function() {
     return '?' + _.map(this._query, function(o) {
       if (_.isString(o)) return o;
@@ -137,7 +133,6 @@ var api = (function() {
       if (_.isObject(o)) {
         var n = [];
         var t = _.each(o, function(v, k) { return n[k] + '=' + v; })
-        console.log('ddddd', t);
         return n;
       }
     }).join('&');
@@ -147,9 +142,10 @@ var api = (function() {
 
     var that = this;
     var opts = {
-      path: this.path + this._getQuery(),
+      path:     this.path + this._getQuery(),
       hostname: this.hostname,
-      method: this.method,
+      method:   this.method,
+      // Move the API Key to setup.
       headers: {
          'api_key': 'stagingTEMPkey'
       }
@@ -192,6 +188,7 @@ var api = (function() {
         if (that.contentType == 'application/json') data = JSON.parse(chunkData);
         if (that._hasParse) data = that.parsefn(data);
 
+        // Build the result for testing.
         that.result = {
           statusCode: res.statusCode,
           data: data,
@@ -206,12 +203,9 @@ var api = (function() {
 
     });
 
-    call.on('error', function(e) { 
-      console.log('Error: ' + e); 
-    });
+    call.on('error', function(e) { console.log('Error: ' + e); });
 
     // Write data to request body
-
     if (jsonData) call.write(jsonData);
     call.end();
 
@@ -220,76 +214,3 @@ var api = (function() {
 
   return options;
 })();
-
-api.host('staging-api.formagg.io');
-
-var test1 = _.clone(api);
-
-describe('/relationship', function(done) {   
-
-  // it('should retreive a maker', function(done){
-  //   _.clone(api)
-  //     .path('/maker/510df090da57f2000000011e')
-  //     .json()
-  //     .get()
-  //     .debug(false)
-  //     .assertions(
-  //       { 
-  //         '$.name': function(val) { assert.equal(val, 'Lactalis') } 
-  //       }
-  //     )
-  //     .done(done);
-  //   }
-  // );
-
-  it('should give us the new maker', function(done){
-    _.clone(api)
-      .path('/maker')
-        .query('a=111')
-        .query( [ 't=11', 'r4=222'])
-        .query('b=111')
-      .json()
-      .post( 
-        {
-          name: 'This little test',
-          source: 'cow',
-          texture: 'Blue'
-        }
-      )
-      .debug(true)
-      .assertions(
-        { 
-          '$.statusCode': function(val) { assert.equal(val, 401) },
-          '$.data': function(val) { assert.equal(val, 'Unauthorized') },
-          '$.raw': function(val) { assert.equal(val, '111') }
-        }
-      )
-      .done(done);
-    }
-  );
-
-});
-
-    // .parse(
-    //   function(d) { 
-    //     console.log(d.name)
-    //     return d.name
-    //   }
-    // )
-
-// test1
-//   .url('/maker')
-//   .post( 
-//    {
-//       name: 'Bobo Creamery',
-//       country: 'United States',
-//       state: 'Vermont'
-//    }
-//   )
-//   .success(
-//     {
-//       t1: 'assert.equal(1, 1)',
-//       t2: 'assert.equal(1, 1)'
-//     }
-//   )
-//   .done();
