@@ -25,11 +25,11 @@ and Jasmine both provide support for testing asynch calls. During the developmen
 that requires OAuth for all not Get calls I found the tests were getting out of hand. This
 library was written to make may tests readable, even late night¡
 
-* JQuery like chainable methods!
-* Provide the ability to test all elements of an API call, options, response, status codes.
-* Provide Custom callbacks for response parsing.
-* Support for both Mocha and Jasmine
-* Provide Custom Authentication callbacks for different OAuth Signatures.
+# JQuery like chainable methods!
+# Provide the ability to test all elements of an API call, options, response, status codes.
+# Provide Custom callbacks for response parsing.
+# Support for both Mocha and Jasmine
+# Provide Custom Authentication callbacks for different OAuth Signatures.
 
 ## Installation
 This is a NPM package. You can download from the package, or call the Github.
@@ -53,9 +53,9 @@ This is a NPM package. You can download from the package, or call the Github.
 To keep things DRY and readable, a few things are assumes or defined once. You can of course
 make your API rests as explicit as you want. The following are assumed.
 
-* All requests are assume to be JSON (application/json). use the json() or contenttype() to change.
-* If no Verb is defined then all request are assumed to be GETs.
-* If no protocal is defined its assumed to be HTTP. Use http() or https() to set explicitly.
+# All requests are assume to be JSON (application/json). use the json() or contenttype() to change.
+# If no Verb is defined then all request are assumed to be GETs.
+# If no protocal is defined its assumed to be HTTP. Use http() or https() to set explicitly.
 
 ## Example of a GET
 This will call the /maker/ID path with a GET and will test the statusCode, data and raw.
@@ -116,17 +116,17 @@ Here is an example of a HTTP Post. The data for the request is defined in the .p
 ### Options
 The are methods that help with setup and debugging of the calls. 
 
-.done(done) - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN).
-.debug() - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
+# .done(done) - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN).
+# .debug() - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
 
 ### .Path() & .Query()
 These two options can be used to either define a base path or to build a path using one or more sets.
 
-.path( '/path/to' ) - Accepts a string. One for API call. 
-.query() - Helper method to append values to the base path. Accepts the following
-  .query( 'field=1') - Single key value string.
-  .query( [ 'field=1', 'field2=2' ]) - Array of key values strings.
-  .qerry( { field1: 1, field2: 2} ) - Object of key values.
+# .path( '/path/to' ) - Accepts a string. One for API call. 
+# .query() - Helper method to append values to the base path. Accepts the following
+# .query( 'field=1') - Single key value string.
+# .query( [ 'field=1', 'field2=2' ]) - Array of key values strings.
+# .qerry( { field1: 1, field2: 2} ) - Object of key values.
 
 ### .Json() 
 This sets the content type. Alternate versions. .contenttype('xml,json,html')
@@ -174,13 +174,13 @@ This code base curently assumes you are using the Mocha packages.
 ### Roadmap
 The following are features and changes planned for the next few weeks.
 
-* Storage of tests and results for chaining of API behaviors.
-* Better OAuth signature options.
-* HTTPS protocal support.
-* Test for the library.
-* Hints for API calls.
-* Swagger UI consumption.
-* Lastly - refactor to allow it to run in a browser.
+# Storage of tests and results for chaining of API behaviors.
+# Better OAuth signature options.
+# HTTPS protocal support.
+# Test for the library.
+# Hints for API calls.
+# Swagger UI consumption.
+# Lastly - refactor to allow it to run in a browser.
 
 Feedback is 100% welcome. The current code was hammered together late night to 
 make testing easier and to get an API out the door.
