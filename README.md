@@ -31,7 +31,7 @@ library was written to make may tests readable, even late night¡
 *  Support for both Mocha and Jasmine
 *  Provide Custom Authentication callbacks for different OAuth Signatures.
 
-## Installation
+## Download
 This is a NPM package. You can download from the package, or call the Github.
 
 ```
@@ -48,14 +48,6 @@ This is a NPM package. You can download from the package, or call the Github.
   api.host('api.formagg.io');
 
 ```
-
-## Defaults
-To keep things DRY and readable, a few things are assumes or defined once. You can of course
-make your API rests as explicit as you want. The following are assumed.
-
-*  All requests are assume to be JSON (application/json). use the `json()` or `contenttype()` to change.
-*  If no Verb is defined then all request are assumed to be GETs.
-*  If no protocal is defined its assumed to be HTTP. Use `http()` or `https()` to set explicitly.
 
 ## Example of a GET
 This will call the /maker/ID path with a GET and will test the statusCode, data and raw.
@@ -112,6 +104,14 @@ Here is an example of a HTTP Post. The data for the request is defined in the .p
     .done(done);
 
 ```
+
+## Defaults
+To keep things DRY and readable, a few things are assumes or defined once. You can of course
+make your API rests as explicit as you want. The following are assumed.
+
+*  All requests are assume to be JSON (application/json). use the `json()` or `contenttype()` to change.
+*  If no Verb is defined then all request are assumed to be GETs.
+*  If no protocal is defined its assumed to be HTTP. Use `http()` or `https()` to set explicitly.
 
 ## Options
 The are methods that help with setup and debugging of the calls. 
