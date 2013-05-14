@@ -3,7 +3,7 @@ isAPI.js
 
 Node.js Library for testing API endpoints with chained HTTP methods.
 
-Still beta. No tests for the test yet.
+Still very pre-beta. No tests for the test yet.
 
 ```
    api
@@ -101,7 +101,7 @@ Here is an example of a HTTP Post. The data for the request is defined in the .p
         state: "Vermont"
      }
     )
-    .success(
+    .assertions(
       {
         "$.statusCode": function(val) { assert.equal(val, 200),
         "$.data._id": function(val) { assert.equal(val, this.port.name), 
@@ -180,6 +180,7 @@ The following are features and changes planned for the next few weeks.
 * Test for the library.
 * Hints for API calls.
 * Swagger UI consumption.
+* Lastly - refactor to allow it to run in a browser.
 
 Feedback is 100% welcome. The current code was hammered together late night to 
 make testing easier and to get an API out the door.

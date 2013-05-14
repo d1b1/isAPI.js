@@ -1,5 +1,5 @@
 {
-  "name": "isAPI",
+  "name": "isapi.js",
   "version": "1.0.0",
   "author": "Stephan Smith <Stephan.Smith.BC93@gmail.com>",
   "description": "Chained Rest functions for testing API with Mocha or Jasmine.",
