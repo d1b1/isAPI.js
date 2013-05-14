@@ -5,9 +5,27 @@ Node.js Library for testing API endpoints with chained HTTP methods.
 
 Still beta. No tests for the test yet.
 
-## Objective
-Provide a super DRY API testing pattern, using the jQuery Chaining of REST attributes.
+```
+   api
+    .path("/maker/100").
+    .json()
+    .get()
+    .assertions(
+      { 
+        '$.data.name': function(val) { assert.equal(val, 'Vermont Blue') },
+        '$.data._id': function(val) { assert.equal(val, 100) }
+      }
+    )
+    .done();
+```
 
+## Objective
+Provide a super DRY API testing pattern, using the jQuery Chaining of REST attributes. Mocha
+and Jasmine both provide support for testing asynch calls. During the development of an API
+that requires OAuth for all not Get calls I found the tests were getting out of hand. This
+library was written to make may tests readable, even late night¡
+
+* JQuery like chainable methods!
 * Provide the ability to test all elements of an API call, options, response, status codes.
 * Provide Custom callbacks for response parsing.
 * Support for both Mocha and Jasmine
@@ -20,7 +38,7 @@ This is a NPM package. You can download from the package, or call the Github.
 
   npm install isAPI
   or 
-  npm install isAPI
+  npm install "git://github.com/d1b1/isAPI.js.git#master",
 
   // Sample code.
   var isAPI = require('isapi');
