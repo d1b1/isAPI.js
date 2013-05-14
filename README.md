@@ -18,6 +18,8 @@ Still very pre-beta. No tests for the test yet.
     .done();
 ```
 
+[![Build Status](https://travis-ci.org/d1b1/isAPI.js.png?branch=master)](https://travis-ci.org/d1b1/isAPI.js)
+
 ## Objective
 Provide a super DRY API testing pattern, using the jQuery Chaining of REST attributes. Mocha
 and Jasmine both provide support for testing asynch calls. During the development of an API

@@ -24,6 +24,7 @@
     "JSONPath": "~0.9.1"
   },
   "scripts": {
-    "start": "./bin/index.js"
+    "start": "./bin/index.js",
+    "test": "mocha test/blank.js"
   }
 }

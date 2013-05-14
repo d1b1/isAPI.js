@@ -1,5 +1,5 @@
 var isAPI    = require('./bin');
-var assert   = require("assert");
+var assert   = require('assert');
 
 var api = isAPI();
 
