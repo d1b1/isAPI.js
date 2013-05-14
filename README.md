@@ -25,11 +25,11 @@ and Jasmine both provide support for testing asynch calls. During the developmen
 that requires OAuth for all not Get calls I found the tests were getting out of hand. This
 library was written to make may tests readable, even late night¡
 
-#  JQuery like chainable methods!
-#  Provide the ability to test all elements of an API call, options, response, status codes.
-#  Provide Custom callbacks for response parsing.
-#  Support for both Mocha and Jasmine
-#  Provide Custom Authentication callbacks for different OAuth Signatures.
+*  JQuery like chainable methods!
+*  Provide the ability to test all elements of an API call, options, response, status codes.
+*  Provide Custom callbacks for response parsing.
+*  Support for both Mocha and Jasmine
+*  Provide Custom Authentication callbacks for different OAuth Signatures.
 
 ## Installation
 This is a NPM package. You can download from the package, or call the Github.
@@ -146,7 +146,7 @@ Currently this only supports HTTP. HTTPs is coming. Use the http() for https() t
 ### .Post() & .Put()
 This sets the rest body. Accepts a object of key values pairs.
 
-## `.Debug()`
+## .Debug()
 Optional method. This is a chainable method that enables or disables the debug output per call. Defaults to true when in the chain. 
 Use true or false to enable or disable in existing tests. 
 
