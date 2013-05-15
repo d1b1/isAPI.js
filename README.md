@@ -39,7 +39,7 @@ This is a NPM package. You can download from the package, or call the Github.
 
   npm install isAPI
   or 
-  npm install "git://github.com/d1b1/isAPI.js.git#master",
+  npm install git://github.com/d1b1/isAPI.js.git#master
 
   // Sample code.
   var isAPI = require('isapi');

@@ -1,4 +1,4 @@
-var isAPI    = require('./bin');
+var isAPI    = require('./index.js');
 var assert   = require('assert');
 
 var api = isAPI();

@@ -1,6 +1,6 @@
 {
   "name": "isapi.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Stephan Smith <Stephan.Smith.BC93@gmail.com>",
   "description": "Chained Rest functions for testing API with Mocha or Jasmine.",
   "engines": {
@@ -10,7 +10,9 @@
   "keywords": [
     "mocha",
     "api",
-    "chain"
+    "chain",
+    "test",
+    "jasmine"
   ],
   "repository": {
     "type": "git",
