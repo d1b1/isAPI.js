@@ -1,6 +1,6 @@
 {
   "name": "isapi.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Stephan Smith <Stephan.Smith.BC93@gmail.com>",
   "description": "Chained Rest functions for testing API with Mocha or Jasmine.",
   "engines": {
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "http://github.com/d1b1/isAPI.js.git"
   },
-  "main": ".",
+  "main": "./lib/isapi",
   "licenses": [
     {
       "type": "The MIT License",
@@ -27,9 +27,9 @@
   ],
   "dependencies": {
     "request": "2.9.202",
-    "underscore": "~1.4.4",
     "JSONPath": "~0.9.1",
-    "mocha": "~1.9.0"
+    "mocha": "~1.9.0",
+    "underscore": "~1.4.4"
   },
   "scripts": {
     "start": "./bin/index.js",

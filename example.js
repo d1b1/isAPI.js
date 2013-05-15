@@ -1,7 +1,6 @@
-var isAPI    = require('./index.js');
 var assert   = require('assert');
-
-var api = isAPI();
+var _        = require('underscore');
+var api      = require('./lib/isapi').Base;
 
 api.host('staging-api.formagg.io');
 
