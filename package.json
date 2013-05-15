@@ -33,6 +33,6 @@
   },
   "scripts": {
     "start": "./bin/index.js",
-    "test": "./node_modules/.bin/mocha test/blank.js --reporter list"
+    "test": "./node_modules/.bin/mocha test/all.js --reporter list"
   }
 }
