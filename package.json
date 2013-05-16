@@ -34,5 +34,8 @@
   "scripts": {
     "start": "./bin/index.js",
     "test": "./node_modules/.bin/mocha test/all.js --reporter list"
+  },
+  "devDependencies": {
+    "sinon": "~1.7.2"
   }
 }

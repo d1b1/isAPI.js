@@ -7,26 +7,22 @@ var api = require('./lib/isapi2');
 
 api.setup( 
  { 
-  'host': 'staging-api.formagg.io',
-  'port': 80
+  'host': 'localhost',
+  'port': 4001,
+  'auth': {
+    consumer_key:    'abc123', 
+    consumer_secret: 'ssh-secret', 
+    token:           '3H3Mw4Oxi5vDmujM', 
+    token_secret:    'nF7duFct2qTnZpPKcvGabJJwS2lU3zYng0cz1OCRtJgdOb4elhEJkol7j3OTSHoR' 
+  }
  }
 );
 
 var formaggio = api();
 
-formaggio.delete();
-formaggio.query('field1=11')
-formaggio.query('field2=11')
-
-console.log('test', formaggio)
-console.log('FullURL', formaggio.getFullUrl());
+formaggio.get().path('/maker/516c16906b5c870200000004').done();
 
 return;
-
-// api.host('staging-api.formagg.io');
-
-api.host('localhost');
-api.port(4001)
 
 GLOBAL.spacedInfo = {};
 
