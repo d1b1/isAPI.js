@@ -1,5 +1,5 @@
 var assert = require('assert');
-var api    = require('../lib/isapi2');
+var api    = require('../lib/isapi');
 //var sionon = require('sinon');
 
 // Simple Placeholder mocha test for getting started with travis.
