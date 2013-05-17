@@ -33,9 +33,10 @@
   },
   "scripts": {
     "start": "./bin/index.js",
-    "test": "./node_modules/.bin/mocha test/all.js --reporter list"
+    "test": "ISAPI_LIBRARY_COV=1 ./node_modules/.bin/mocha test -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
   "devDependencies": {
-    "sinon": "~1.7.2"
+    "sinon": "~1.7.2",
+    "coveralls": "~2.0.7"
   }
 }

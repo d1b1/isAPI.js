@@ -1,6 +1,6 @@
+var libpath = process.env['ISAPI_LIBRARY_COV'] ? '../lib-cov' : '../lib';
 var assert = require('assert');
-var api    = require('../lib/isapi');
-//var sionon = require('sinon');
+var api    = require(libpath + '/isapi');
 
 // Simple Placeholder mocha test for getting started with travis.
 
