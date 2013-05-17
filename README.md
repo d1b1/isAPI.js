@@ -1,21 +1,21 @@
 isAPI.js
 ========
 
-Node.js Library for testing API endpoints with chained HTTP methods.
-
-Still very pre-beta. No tests for the test yet.
+Node.js Library for testing API endpoints with chained methods. Follows the 
+jQuery chaining pattern to keep HTTP/HTTP API calls short, readable and easy
+to write.
 
 ```
-   api()
-    .path('/maker/100')
-    .get().json()
-    .assertions(
-      { 
-        '$.data.name': function(val) { assert.equal(val, 'Vermont Blue') },
-        '$.data._id': function(val) { assert.equal(val, 100) }
-      }
-    )
-    .done();
+ api()
+  .path('/maker/100')
+  .get()
+  .assertions(
+    { 
+      '$.data.name': function(val) { assert.equal(val, 'Vermont Blue') },
+      '$.data._id': function(val) { assert.equal(val, 100) }
+    }
+  )
+  .done();
 ```
 
 [![Build Status](https://travis-ci.org/d1b1/isAPI.js.png?branch=master)](https://travis-ci.org/d1b1/isAPI.js)
@@ -202,9 +202,12 @@ the string to provide testable parts and cloneable settings. Patterned after the
 url string formatting. 
 
 ```
-  example:
+  Calling the following:
+
     api().url('https://site.com/path/twitter?term=1&limit10');
 
+  would be the same as the long form and would be ready for the `clone()`.
+  
     api()
       .htts()
       .host('site.com')
@@ -213,7 +216,6 @@ url string formatting.
       .query({ term: 1, limit: 10 })
 
     var api2 = api().clone();
-
 ```
 
 ## Dependencies
@@ -232,6 +234,7 @@ The following are features and changes planned for the next few weeks.
 *  Swagger UI consumption.
 *  Lastly - refactor to allow it to run in a browser.
 
-Feedback is 100% welcome. The current code was hammered together late night to 
-make testing easier and to get an API out the door.
+Feedback is `100%` welcome. The current code was hammered together late night to 
+make testing easier and to get an API out the door. I was surprise that this
+was not available. Needs a better name?
 
