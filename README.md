@@ -6,7 +6,7 @@ Node.js Library for testing API endpoints with chained HTTP methods.
 Still very pre-beta. No tests for the test yet.
 
 ```
-   api
+   api()
     .path('/maker/100')
     .get().json()
     .assertions(
@@ -55,8 +55,9 @@ This will call the /maker/ID path with a GET and will test the statusCode, data 
 
   describe("/Maker", function(done) {   
     it("should return a maker", function(done){
-      api
-        .path("/maker/1").query('a=111').query('b=111')
+      api()
+        .path("/maker/1")
+        .query('a=111').query('b=111')
         .json()
         .get()
         .assertions(
@@ -82,7 +83,7 @@ Here is an example of a HTTP Post. The data for the request is defined in the `.
   // the required fields.
 
   api
-    .url("/maker")
+    .path("/maker")
     .post( 
      {
         name: "Vermont Creamery",
@@ -195,6 +196,25 @@ used in followon calls or in `afterEach()` functions to tear down data created d
 `.clone()` - Will provide the ability to clone an existing request settings.
 
 `.authorize()` - Will tell the request to assign the desired auth to the request header.
+
+`.url(string)` - Will provide the ability to provide a full URL. The API call will parse
+the string to provide testable parts and cloneable settings. Patterned after the MongoDB 
+url string formatting. 
+
+```
+  example:
+    api().url('https://site.com/path/twitter?term=1&limit10');
+
+    api()
+      .htts()
+      .host('site.com')
+      .get()
+      .path('/path/twitter')
+      .query({ term: 1, limit: 10 })
+
+    var api2 = api().clone();
+
+```
 
 ## Dependencies
 This code base curently assumes you are using the Mocha packages.
