@@ -19,6 +19,7 @@ to write.
 ```
 
 [![Build Status](https://travis-ci.org/d1b1/isAPI.js.png?branch=master)](https://travis-ci.org/d1b1/isAPI.js)
+[![Coverage Status](https://coveralls.io/repos/d1b1/isAPI.js/badge.png?branch=master)](https://coveralls.io/r/d1b1/isAPI.js?branch=master)
 
 ## Objective
 Provide a super DRY API testing pattern, using the jQuery Chaining of REST attributes. Mocha

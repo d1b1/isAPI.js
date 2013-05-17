@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "./bin/index.js",
-    "test": "make test-coveralls"
+    "test": "make test; make test-coveralls"
   },
   "devDependencies": {
     "sinon": "~1.7.2",
