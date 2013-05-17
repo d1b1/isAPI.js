@@ -36,7 +36,6 @@ library was written to make may tests readable, even late night¡
 This is a NPM package. You can download from the package, or call the Github.
 
 ```
-
   npm install isAPI
   or 
   npm install git://github.com/d1b1/isAPI.js.git#master
@@ -47,10 +46,9 @@ This is a NPM package. You can download from the package, or call the Github.
 
   // Provide the hostname (do not include HTTP)
   api.host('api.formagg.io');
-
 ```
 
-## Example of a GET
+## Example of a GET()
 This will call the /maker/ID path with a GET and will test the statusCode, data and raw.
 
 ```
@@ -75,8 +73,8 @@ This will call the /maker/ID path with a GET and will test the statusCode, data 
 
 ```
 
-## Example of a Post
-Here is an example of a HTTP Post. The data for the request is defined in the .post() method.
+## Example of a Post()
+Here is an example of a HTTP Post. The data for the request is defined in the `.post()` method.
 
 ```
   // Create a new Maker in the formagg.io API with Name, Country and State,
@@ -112,42 +110,18 @@ make your API rests as explicit as you want. The following are assumed.
 *  If no Verb is defined then all request are assumed to be GETs.
 *  If no protocal is defined its assumed to be HTTP. Use `http()` or `https()` to set explicitly.
 
-## Options
-The are methods that help with setup and debugging of the calls. 
+To setup a test with API defaults, use the following before all other calls. Any values
+provides in the configuration will be used as defaults for all calls. Specific chained methods
+will override the defaults: host(), port(), get() etc.
 
-*  `.done(done)` - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN). The `done` links the call
-to the Mocha or Jasmine async `done` function and ensures the tests comply with the testing framework flow.
-*  `.debug()` - Dumps out the HTTP requests and resulting data. Also .debug(true) or .debug(false) works during testing.
+```
+    var isapi = require('isapi');
 
-## .Path() & .Query()
-These two options can be used to either define a base path or to build a path using one or more sets.
-
-*  `.path( '/path/to' )` - Accepts a string. One for API call. 
-*  `.query()` - Helper method to append values to the base path. Accepts the following
-*  `.query( 'field=1')` - Single key value string.
-*  `.query( [ 'field=1', 'field2=2' ])` - Array of key values strings.
-*  `.qerry( { field1: 1, field2: 2} )` - Object of key values.
-
-## .Json() 
-This sets the content type. Alternate versions. .contenttype('xml,json,html')
-
-## HTTP Verbs
-Use the following to set the HTTP verb.
-
-*  `.get()` - Sets the Method to 'GET'. Use can pass in a string, array or object argument to add to the path.
-*  `.post()` - Sets the Method to 'POST'. Argument (Object) is used in the request body.
-*  `.put()` - Sets the Method to 'PUT'. Argument (Object) is used in the request body.
-*  `.delete()` - Sets the Method to 'DELETE'.
-
-## Protocals
-Currently this only supports HTTP. HTTPs is coming. Use the http() for https() to set the protocal at the call level.
-
-### .Post() & .Put()
-This sets the rest body. Accepts a object of key values pairs.
-
-## .Debug()
-Optional method. This is a chainable method that enables or disables the debug output per call. Defaults to true when in the chain. 
-Use true or false to enable or disable in existing tests. 
+    isapi.configure({
+      host: 'myapi.com',
+      port: 8080
+    });
+```
 
 ## Assertions
 This an object with each key contains the HTTP request value or the data value to check. Its assumed you will
@@ -156,30 +130,71 @@ and provide a patterns for testing elements, arrays and patterns in the data.
 
 Read [Stehan.Goessner Post](http://goessner.net/articles/JsonPath/) for more about JSONPath.
 
-## Response Data Object
-All response data is testable. Note the `$` is not the Jquery selector.
+## General Methods
+
+`.get()` - Sets the request method to 'GET'.
+
+`.put()` or `.put({})` - Sets the request method to to 'PUT'. If a dictionary is provides it sets the request data values.
+
+`.post()` or `.psot({})` - Sets the request method to to 'POST'. If a dictionary is provides it sets the request data values.
+
+`.delete()` - Sets the request method to 'DELETE'.
+
+`.data({})` - Sets the request data. Expectes a dictionary of key values pairs.
+
+`.http()`, `.https()` or `.protocal('https|http')` - Sets the protocal.
+
+`.port( int )` - Sets the request port number. Integer is required.
+
+`.host('domain')` - Sets the host. Do not include the protocal, just the domain.
+
+`.path('/path/to')` - Sets the request path.
+
+`.query(string)`, `.query([string])` or `.query({ key: value })` - Sets the query values in the request. Supports multiple calls. Examples: `.query('field=1')`, `.query(['field=1', 'field2=2'])` `.query({ field1: 1, field2: 2})`
+
+`.json()`, `.plain()`, `.html()` - Sets the request content type to 'json' or `html/text`. All api calls default to json.
+
+`.contenttype(string)` - Provides an alternate methods to set the contenttype. `.contenttype('json') == .json()`.
+
+`.done()` or `.done(done)` - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN). 
+The `done` links the call to the Mocha or Jasmine async `done` function and ensures the tests comply with the testing framework flow.
+
+## Assertion Methods
+These are methods for defining the test assertions to perform on the response data. 
+
+`.assertions({})` - Accepts a dictionary of jsonPath patterns and assertion functions.
+
+`.assert()` - Accepts a single assertion function. This method can be used in the chain multiple times.
+
+## Debug Methods
+The following are debug and testing methods that can be used write building a test, or in assertions. One the `.show()` 
+can be used in a api chain. 
+
+`.show()` - Provides the ability to output settings and results. Accepts true or false. Defaults to true.
+
+`.getParam()` - Provides the ability to get request options. Without any value defined it outputs all values. Accepts 
+the following: host, port, path, fullURL, protocal and request.
+
+`.getFullUrl()` - Gets the request full URL.
+
+## Response Data
+All response data is available for testing. Note the `$` is not the Jquery selector.
 
 *  `$.statusCode` - HTTP statusCode (200, 401 etc).
 *  `$.options` - Contains all the rest options; path, hostname, headers etc.
 *  `$.data` - Parsed response data.
-*  `$.raw` - Unparsed HTTP response string.
+*  `$.raw` - Unparsed HTTP response data (string).
 
 ## Experimental
 
-`.parse()` - Provides the ability to parse the response object with a callback. This might
-be used to remove API wrappers and content that makes tests hard to read. This will be something
-that can be defined for all API calls, or at the API call levels.
+`.explain()` - Provides a human readable description for us in the documentation.
 
-Example of a parse call that will remove all data and only return the .data value with
-a specific value in the response call. 
+`.store(string)` - Provides variable name for the request data. Each API response is stored and can be
+used in followon calls or in `afterEach()` functions to tear down data created during a test run. 
 
-```
-  .get()
-  .parse(
-    function(data) {  return data.name } 
-  )
-  .done()
-```
+`.clone()` - Will provide the ability to clone an existing request settings.
+
+`.authorize()` - Will tell the request to assign the desired auth to the request header.
 
 ## Dependencies
 This code base curently assumes you are using the Mocha packages.
@@ -192,9 +207,7 @@ This code base curently assumes you are using the Mocha packages.
 The following are features and changes planned for the next few weeks.
 
 *  Storage of tests and results for chaining of API behaviors.
-*  Better OAuth signature options.
 *  HTTPS protocal support.
-*  Test for the library.
 *  Hints for API calls.
 *  Swagger UI consumption.
 *  Lastly - refactor to allow it to run in a browser.
