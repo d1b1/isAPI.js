@@ -1,3 +1,12 @@
 language: node_js
 node_js:
   - 0.8.x
+
+after_success:
+  - ./scripts/deploy-to-heroku.sh
+
+env:
+  global:
+  - secure: ! 'ASrXDPwoLfTj7wscz9P8kgthKPPpYfXlpQMRA+qWH0GxJqIjHFaOMAsgug2b
+      bfkRUaJRi/4DXtt1nuUncLWT0xJ3mNPxKousZgBJ7U/WfK3i1RzPNqqDrM7y
+      MDBVAGrlxIwoiDmTcJYWk3DZY7NkWrmnWvJZqTbSxuExySCWUO8='
