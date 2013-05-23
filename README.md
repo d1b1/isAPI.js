@@ -119,7 +119,7 @@ will override the defaults: host(), port(), get() etc.
 ```
     var isapi = require('isapi');
 
-    isapi.configure({
+    isapi.setup({
       host: 'myapi.com',
       port: 8080
     });
@@ -159,12 +159,21 @@ Read [Stehan.Goessner Post](http://goessner.net/articles/JsonPath/) for more abo
     * `.query(['field=1', 'field2=2'])` 
     * `.query({ field1: 1, field2: 2})`
 
-`.json()`, `.plain()`, `.html()` - Sets the request content type to 'json' or `html/text`. All api calls default to json.
-
-`.contenttype(string)` - Provides an alternate methods to set the contenttype. `.contenttype('json') == .json()`.
+The `.done()` provides the tail for API call chains. This must be the last call.
 
 `.done()` or `.done(done)` - Last element in the chain. Executes the call. (MUST BE LAST METHOD IN CHAIN). 
 The `done` links the call to the Mocha or Jasmine async `done` function and ensures the tests comply with the testing framework flow.
+
+## Content Types
+The followng content types are supported. All api calls default to json.
+
+`.json()` - Sets the Header Content Type to `application\json`.
+
+`.plain()` - Sets the Header to `text\plain`.
+
+`.html()` - Sets the Header content type to `text\html`.
+
+`.contenttype(string)` - Provides an alternate methods to set the contenttype. `.contenttype('json') == .json()`.
 
 ## Assertion Methods
 These are methods for defining the test assertions to perform on the response data. 

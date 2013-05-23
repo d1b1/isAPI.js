@@ -1,6 +1,6 @@
 {
   "name": "isapi.js",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "Stephan Smith <Stephan.Smith.BC93@gmail.com>",
   "description": "Chained Rest functions for testing API with Mocha or Jasmine.",
   "engines": {
