@@ -152,7 +152,12 @@ Read [Stehan.Goessner Post](http://goessner.net/articles/JsonPath/) for more abo
 
 `.path('/path/to')` - Sets the request path.
 
-`.query(string)`, `.query([string])` or `.query({ key: value })` - Sets the query values in the request. Supports multiple calls. Examples: `.query('field=1')`, `.query(['field=1', 'field2=2'])` `.query({ field1: 1, field2: 2})`
+`.query(string)`, `.query([string])` or `.query({ key: value })` - Sets the query values in the request. Supports multiple calls. 
+
+    Examples:
+    * `.query('field=1')`
+    * `.query(['field=1', 'field2=2'])` 
+    * `.query({ field1: 1, field2: 2})`
 
 `.json()`, `.plain()`, `.html()` - Sets the request content type to 'json' or `html/text`. All api calls default to json.
 
@@ -167,6 +172,30 @@ These are methods for defining the test assertions to perform on the response da
 `.assertions({})` - Accepts a dictionary of jsonPath patterns and assertion functions.
 
 `.assert()` - Accepts a single assertion function. This method can be used in the chain multiple times.
+
+## Persistent Data
+The following methods provide the options for naming and storage of each call. 
+
+`.named()` - Provides a method for attaching the API data and options into a named dictionary. Example: .named('User1') is accessible in following calls with `_remember.User1.data.name`. 
+
+    Examples:
+    * `.get().path('/user/' + _remember.User1.data.name )`
+    * `.get().put( { 'nicknake': _remember.User1.data.name } )`
+    * `.assertions({ 
+         '$.data.name': function(val) { assert.equal(val, _remember.User1.data.name)} 
+       })`
+
+Variables: 
+
+`_last` - Always contains the value of the last API call. Overriden with each request.
+
+`_remember` (Dict) - Contains the Options and data for each `named()` call. This function is designed to
+allow flexible access to the data in previous call. Use this to build following assertions or to clearup
+data after tests are completed.
+
+    Examples:
+    * `_remember.FirstRecord` - Retreives the 'FirstRecord' data stored using `.named('FirstRecord')`.
+    * `_remember.length` - Get the size of the stored API calls.
 
 ## Debug Methods
 The following are debug and testing methods that can be used write building a test, or in assertions. One the `.show()` 
@@ -191,9 +220,6 @@ All response data is available for testing. Note the `$` is not the Jquery selec
 
 `.explain()` - Provides a human readable description for us in the documentation.
 
-`.store(string)` - Provides variable name for the request data. Each API response is stored and can be
-used in followon calls or in `afterEach()` functions to tear down data created during a test run. 
-
 `.clone()` - Will provide the ability to clone an existing request settings.
 
 `.authorize()` - Will tell the request to assign the desired auth to the request header.
@@ -210,7 +236,7 @@ url string formatting.
   would be the same as the long form and would be ready for the `clone()`.
   
     api()
-      .htts()
+      .https()
       .host('site.com')
       .get()
       .path('/path/twitter')
