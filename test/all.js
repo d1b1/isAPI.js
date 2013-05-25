@@ -1,6 +1,7 @@
 var libpath = process.env['ISAPI_LIBRARY_COV'] ? '../lib-cov' : '../lib';
-var assert = require('assert');
-var api    = require(libpath + '/isapi');
+var assert  = require('assert');
+var api     = require(libpath + '/isapi');
+var expect  = require('expect.js');
 
 // Simple Placeholder mocha test for getting started with travis.
 
@@ -67,15 +68,47 @@ describe('defaults', function() {
     var aAPI = api().host('you.com').put({ field1: 1, field2: 2 });
 
     assert.equal(aAPI.getParam('request').opts.path, '');
-    assert.equal(aAPI.getParam('request').opts.headers['Content-Length'], JSON.stringify({ field1: 1, field2: 2 }).length);
-    assert.equal(aAPI.getParam('request').opts.headers['Content-Type'], 'application/json');
+    // assert.equal(aAPI.getParam('request').opts.headers['Content-Length'], JSON.stringify({ field1: 1, field2: 2 }).length);
   });
 
 });
 
-describe('http request', function() {  
+describe('http request with a file', function() {  
 
-  it('gets a cheese maker', function(done){
+  it('attaches to file and gets a response', function(done){
+
+    api.setup(
+      { 'host': 'staging-api.formagg.io',
+        'auth': {
+           consumer_key:    'abc123', 
+           consumer_secret: 'ssh-secret', 
+           token:           '3H3Mw4Oxi5vDmujM', 
+           token_secret:    'nF7duFct2qTnZpPKcvGabJJwS2lU3zYng0cz1OCRtJgdOb4elhEJkol7j3OTSHoR' 
+        }
+     });
+
+    api()
+      .put()
+      .path('/maker/516c16906b5c870200000004/attach')
+      .file('logofile', './test/files/sample.jpg')
+      .assertions(
+        {
+          '$.options.headers.content-type': function(val) { 
+            expect(val).to.contain(val, 'multipart/form-data'); 
+          }
+        }
+      )
+      .show(false) // Leave the method, disable the debug.
+      .done(done);
+
+  });
+
+});
+
+
+describe('http GET request', function() {  
+
+  it('gets a json document', function(done){
 
     api.setup(
       { 'host': 'staging-api.formagg.io',
@@ -92,14 +125,11 @@ describe('http request', function() {
       .path('/maker/516c16906b5c870200000004')
       .assertions(
         {
-          // Cheese Maker Fields
           '$.data.name':    function(val) { assert.equal(val, 'Test Maker 4'); },
           '$.data.address': function(val) { assert.equal(val, '113 Atlantic'); },
           '$.data.city':    function(val) { assert.equal(val, 'Corpus Christi'); },
           '$.data.state':   function(val) { assert.equal(val, 'Texas'); },
           '$.data.country': function(val) { assert.equal(val, 'United States'); },
-          // // Status Code
-          // '$.statusCode': function(val) { assert.equal(val, 200); }
         }
       )
       .show(false) // Leave the method, disable the debug.
