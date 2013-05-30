@@ -176,6 +176,8 @@ The followng content types are supported. All api calls default to json.
 
 `.contenttype(string)` - Provides an alternate methods to set the contenttype. `.contenttype('json') == .json()`.
 
+`.file( name, path ) - Provides a method for attaching a file to API call. Currently supports only a single file.
+
 ## Assertion Methods
 These are methods for defining the test assertions to perform on the response data. 
 
@@ -221,6 +223,7 @@ the following: host, port, path, fullURL, protocal and request.
 ## Response Data
 All response data is available for testing. Note the `$` is not the Jquery selector.
 
+*  `$.input` - Contains the raw data added to the API call. Available for secondary calls or testing in the Assertions.
 *  `$.statusCode` - HTTP statusCode (200, 401 etc).
 *  `$.options` - Contains all the rest options; path, hostname, headers etc.
 *  `$.data` - Parsed response data.
