@@ -95,6 +95,9 @@ describe('http request with a file', function() {
         {
           '$.options.headers.content-type': function(val) { 
             expect(val).to.contain(val, 'multipart/form-data'); 
+          },
+          '$.data': function(val) { 
+            console.log('data', val); 
           }
         }
       )
